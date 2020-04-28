@@ -22,3 +22,19 @@
       radial-gradient(center, rgba(40,80,60,1), rgba(0,20,20,.6)) !important;
     background-size: cover;
 }
+
+.endgame {
+  display: none;
+  width: 200px;
+  top: 120px;
+  background-color: rgba(205,133,63, 0.8);
+  position: absolute;
+  left: 50%;
+  margin-left: -100px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  text-align: center;
+  border-radius: 5px;
+  color: white;
+  font-size: 2em;
+}
