@@ -82,12 +82,21 @@ function turn(obj, player) {
     aiBoard.push(id);
     let el = document.getElementById(id);
     el.innerText = player;
-    console.log(obj.score)
+    assemblesPiece(el);
+}
+function assemblesPiece(el){
+    let w = el.clientWidth;
+    let h = el.clientHeight;
+    el.style.fontSize = w*0.9 + 'px';
+    el.style.lineHeight = w*0.9 + 'px';
+    el.align = 'center';
+    el.marginTop = w*(-0.2) + 'px';
 }
 function turnClick(el){
     if(aiBoard.includes(parseInt(el.target.id)) || huBoard.includes(parseInt(el.target.id))) 
         return false;
     el.target.innerText = huPlayer;
+    assemblesPiece(el.target);
     huBoard.push(parseInt(el.target.id));
     origBoard[parseInt(el.target.id)] = huPlayer;
     if (!checkWin(origBoard, aiPlayer)&& !checkWin(origBoard, huPlayer) && !checkTie()) {
