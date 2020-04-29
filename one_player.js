@@ -89,6 +89,7 @@ function turn(obj, player) {
     else if (checkWin(origBoard, aiPlayer)) alert (aiPlayer + ' won!')
     else if (checkWin(origBoard, huPlayer)) alert (huPlayer + ' won!')
 }
+
 function assemblesPiece(el){
     let w = el.clientWidth;
     let h = el.clientHeight;
