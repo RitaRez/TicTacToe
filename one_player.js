@@ -51,7 +51,6 @@ const cells = document.querySelectorAll('.cell');
 startGame();
 
 function startGame() {    
-    document.querySelector(".endgame").style.display = "none";
 	for (var i = 0; i < cells.length; i++) {
 		cells[i].innerText = '';
 		cells[i].addEventListener('click', turnClick, false); 
@@ -67,14 +66,17 @@ function checkWin(board, player){
     let checker = (arr, target) => target.every(v => arr.includes(v));   
     let includes = false; 
     winCombos.forEach(el => {
-        if(checker(new_arr, el)) includes = true;
+        if(checker(new_arr, el)) {
+            includes = true;
+        }
     });
     return includes;
 }
 function checkTie(){
     let availSpots = emptySquares();
-    if(availSpots.length === 0 && !checkWin(aiBoard) && !checkWin(huBoard)) return true;
-    else return false;
+    if(availSpots.length === 0 && !checkWin(aiBoard) && !checkWin(huBoard)) {
+        return true;
+    } else return false;
 }
 function turn(obj, player) {
     let id = parseInt(obj.index)  
@@ -83,6 +85,9 @@ function turn(obj, player) {
     let el = document.getElementById(id);
     el.innerText = player;
     assemblesPiece(el);
+    if(checkTie()) alert('Tie')
+    else if (checkWin(origBoard, aiPlayer)) alert (aiPlayer + ' won!')
+    else if (checkWin(origBoard, huPlayer)) alert (huPlayer + ' won!')
 }
 function assemblesPiece(el){
     let w = el.clientWidth;
@@ -99,9 +104,8 @@ function turnClick(el){
     assemblesPiece(el.target);
     huBoard.push(parseInt(el.target.id));
     origBoard[parseInt(el.target.id)] = huPlayer;
-    if (!checkWin(origBoard, aiPlayer)&& !checkWin(origBoard, huPlayer) && !checkTie()) {
+    if (!checkWin(origBoard, aiPlayer)&& !checkWin(origBoard, huPlayer) && !checkTie()) 
         turn(minimax(origBoard, aiPlayer), aiPlayer);
-    }    
 }
 function emptySquares(){
     let arr = [];
